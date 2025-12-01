@@ -1,0 +1,102 @@
+<div class="min-h-screen bg-gray-100 px-6 py-6">
+
+  <!-- NAV SUPERIOR -->
+  <div class="bg-white shadow-md rounded-md p-4 flex justify-between items-center mb-6">
+    <div class="flex items-center gap-3">
+      <img src="assets/logo.png" alt="Logo" class="w-12">
+      <div>
+        <p class="font-semibold text-gray-800 text-lg">Bienvenido,</p>
+        <p class="font-semibold -mt-1">Administrador</p>
+      </div>
+    </div>
+
+    <button class="flex items-center gap-2 text-gray-700 hover:text-black font-medium">
+      <span class="text-xl">⛔</span>
+      Cerrar Sesión
+    </button>
+  </div>
+
+  <!-- TABS -->
+  <div class="bg-white rounded-md shadow-md p-4 flex justify-center gap-10 mb-6">
+    <button class="flex items-center gap-2 bg-orange-200 px-4 py-2 rounded-full font-medium">
+      📦 Inventario
+    </button>
+
+    <button class="flex items-center gap-2 text-gray-700 hover:text-black">
+      📑 Solicitudes
+    </button>
+
+    <button class="flex items-center gap-2 text-gray-700 hover:text-black">
+      👤 Usuarios
+    </button>
+  </div>
+
+  <!-- TÍTULO -->
+  <h1 class="text-center text-3xl font-semibold mb-2">Gestión de Inventario</h1>
+  <p class="text-center text-gray-600 mb-8">Total de artículos: 4</p>
+
+  <!-- BUSCADOR / FILTROS / BOTÓN -->
+  <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-10">
+
+    <!-- Buscador -->
+    <div class="flex items-center bg-white border border-gray-300 rounded-md px-3 w-full max-w-sm">
+      <span class="text-gray-600">🔍</span>
+      <input
+        type="text"
+        placeholder="Buscar Artículos..."
+        class="w-full p-2 outline-none"
+      />
+    </div>
+
+    <!-- Categorías -->
+    <select class="border border-gray-300 p-2 rounded-md bg-white w-full max-w-xs">
+      <option>Todas las categorías</option>
+      <option>Electrónica</option>
+      <option>Mobiliario</option>
+      <option>Herramientas</option>
+    </select>
+
+    <!-- Agregar Artículo -->
+    <button class="bg-black text-white px-4 py-2 rounded-md flex items-center gap-2 hover:bg-gray-800">
+      ➕ Agregar Artículo
+    </button>
+  </div>
+
+  <!-- LISTA DE ARTÍCULOS -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+    <!-- CARD DE ARTÍCULO -->
+    <div
+      *ngFor="let item of articulos"
+      class="bg-white border border-gray-300 rounded-lg p-4 shadow-sm"
+    >
+
+      <!-- Imagen -->
+      <img src="assets/proyector.png" class="w-full h-32 object-contain mb-4">
+
+      <!-- Texto -->
+      <p class="font-semibold">Proyector Epson EB-X41</p>
+      <p class="text-gray-600 text-sm">Electrónica</p>
+      <p class="text-gray-600 text-sm mb-3">Proyector de alta definición para presentaciones</p>
+
+      <!-- Estado -->
+      <select
+        class="border border-gray-300 rounded-md w-full p-2 text-sm mb-4"
+      >
+        <option>Disponible</option>
+        <option>Prestado</option>
+        <option>Mantenimiento</option>
+      </select>
+
+      <!-- Acciones -->
+      <div class="flex justify-end gap-3 text-gray-700 text-xl">
+        <button class="hover:text-black">✏️</button>
+        <button class="hover:text-black">🗑️</button>
+        <button class="hover:text-black">ℹ️</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

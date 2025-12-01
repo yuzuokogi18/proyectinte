@@ -1,0 +1,61 @@
+<div class="min-h-screen flex items-center justify-center bg-white px-4">
+  <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+
+    <!-- Imagen -->
+    <div class="flex justify-center">
+      <img src="assets/login-students.png" alt="Students" class="w-[90%] h-auto">
+    </div>
+
+    <!-- Formulario -->
+    <div class="px-6 md:px-12">
+      <h2 class="text-4xl font-semibold mb-10">Inicia Sesión Alumno</h2>
+
+      <!-- Email -->
+      <label class="block text-lg mb-1 font-medium">Correo Electrónico:</label>
+      <input
+        type="email"
+        [(ngModel)]="correo"
+        class="w-full border border-orange-200 rounded-md p-3 mb-6
+               outline-none focus:ring-2 focus:ring-orange-300"
+      />
+
+      <!-- Password -->
+      <label class="block text-lg mb-1 font-medium">Contraseña:</label>
+      <div class="relative">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          [(ngModel)]="password"
+          class="w-full border border-orange-200 rounded-md p-3 pr-12 
+                 outline-none focus:ring-2 focus:ring-orange-300"
+        />
+
+        <button
+          type="button"
+          (click)="togglePassword()"
+          class="absolute right-4 top-3 text-orange-400"
+        >
+          <span *ngIf="!showPassword">👁️‍🗨️</span>
+          <span *ngIf="showPassword">🙈</span>
+        </button>
+      </div>
+
+      <!-- Botón -->
+      <button
+        (click)="login()"
+        class="bg-orange-300 hover:bg-orange-400 w-full text-white text-xl 
+               font-semibold py-3 rounded-md mt-10"
+      >
+        VAMOS!
+      </button>
+
+      <!-- Registro -->
+      <p class="mt-4 text-center text-sm">
+        Aún no tienes cuenta?
+        <a routerLink="/registroalumno" class="text-blue-600 font-semibold hover:underline">
+          ¡Regístrate!
+        </a>
+      </p>
+    </div>
+
+  </div>
+</div>
