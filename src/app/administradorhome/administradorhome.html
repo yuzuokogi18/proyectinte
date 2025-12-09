@@ -1,102 +1,278 @@
-<div class="min-h-screen bg-gray-100 px-6 py-6">
+<app-adminheader></app-adminheader>
 
-  <!-- NAV SUPERIOR -->
-  <div class="bg-white shadow-md rounded-md p-4 flex justify-between items-center mb-6">
-    <div class="flex items-center gap-3">
-      <img src="assets/logo.png" alt="Logo" class="w-12">
-      <div>
-        <p class="font-semibold text-gray-800 text-lg">Bienvenido,</p>
-        <p class="font-semibold -mt-1">Administrador</p>
-      </div>
+<div class="min-h-screen bg-blow-50 px-4 sm:px-6 py-6 sm:py-8">
+
+    <!-- TITULO + BOTON -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+
+        <div>
+            <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-1">Inventario</h1>
+            <p class="text-gray-500 text-sm sm:text-base">Gestión de inventario</p>
+        </div>
+
+        <button
+            (click)="openModal()"
+            class="w-full sm:w-auto text-gray-800 px-5 py-2 rounded-xl flex items-center justify-center gap-2 shadow-lg transition-all text-sm sm:text-base"
+            style="background-color: #FFD9AB;"
+        >
+            ➕ Agregar Artículo
+        </button>
     </div>
 
-    <button class="flex items-center gap-2 text-gray-700 hover:text-black font-medium">
-      <span class="text-xl">⛔</span>
-      Cerrar Sesión
-    </button>
-  </div>
+    <!-- BUSCADOR + SELECT + BOTONES -->
+    <div class="flex flex-col sm:flex-row flex-wrap md:flex-nowrap items-center gap-4 mb-8">
 
-  <!-- TABS -->
-  <div class="bg-white rounded-md shadow-md p-4 flex justify-center gap-10 mb-6">
-    <button class="flex items-center gap-2 bg-orange-200 px-4 py-2 rounded-full font-medium">
-      📦 Inventario
-    </button>
+        <!-- BUSCADOR -->
+        <div class="flex items-center bg-white border border-gray-200 rounded-2xl px-4 py-3 shadow-md w-full sm:w-[20rem] md:w-[22rem]">
+            <span class="text-gray-400 mr-3">🔍</span>
+            <input
+                type="text"
+                placeholder="Buscar artículos..."
+                class="w-full outline-none text-gray-700 text-sm sm:text-[15px]"
+                [(ngModel)]="busqueda"
+                (input)="onBusquedaChange()"
+            />
+        </div>
 
-    <button class="flex items-center gap-2 text-gray-700 hover:text-black">
-      📑 Solicitudes
-    </button>
+        <!-- SELECT -->
+        <select
+            class="bg-white border border-gray-200 rounded-2xl px-4 py-3 shadow-md
+                   w-full sm:w-[20rem] md:w-[22rem] text-gray-700 text-sm sm:text-[15px] outline-none h-[3.2rem]"
+            [(ngModel)]="categoriaSeleccionada"
+            (change)="onCategoriaChange()"
+        >
+            <option value="">Todas las categorías</option>
+            <option value="1">Electrónico</option>
+            <option value="2">Laboratorio</option>
+            <option value="3">Uso escolar</option>
+        </select>
 
-    <button class="flex items-center gap-2 text-gray-700 hover:text-black">
-      👤 Usuarios
-    </button>
-  </div>
+        <!-- BOTONES DE VISTA -->
+        <div class="flex gap-3 ml-auto sm:ml-0 md:ml-auto">
+            
+            <button
+                (click)="vista='cards'"
+                [ngClass]="vista==='cards' ? 'text-white shadow' : 'bg-white text-gray-700'"
+                class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-gray-300 hover:bg-gray-100 transition flex items-center justify-center"
+                [style.backgroundColor]="vista==='cards' ? '#FFD9AB' : 'white'"
+                title="Vista de Cards"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5"
+                    [attr.fill]="vista==='cards' ? 'white' : '#0f766e'"
+                    viewBox="0 0 24 24">
+                    <path d="M3 3h8v8H3V3zm0 10h8v8H3v-8zm10-10h8v8h-8V3zm0 10h8v8h-8v-8z"/>
+                </svg>
+            </button>
 
-  <!-- TÍTULO -->
-  <h1 class="text-center text-3xl font-semibold mb-2">Gestión de Inventario</h1>
-  <p class="text-center text-gray-600 mb-8">Total de artículos: 4</p>
-
-  <!-- BUSCADOR / FILTROS / BOTÓN -->
-  <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-10">
-
-    <!-- Buscador -->
-    <div class="flex items-center bg-white border border-gray-300 rounded-md px-3 w-full max-w-sm">
-      <span class="text-gray-600">🔍</span>
-      <input
-        type="text"
-        placeholder="Buscar Artículos..."
-        class="w-full p-2 outline-none"
-      />
+            <button
+                (click)="vista='tabla'"
+                [ngClass]="vista==='tabla' ? 'text-white shadow' : 'bg-white text-gray-700'"
+                class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-gray-300 hover:bg-gray-100 transition flex items-center justify-center"
+                [style.backgroundColor]="vista==='tabla' ? '#FFD9AB' : 'white'"
+                title="Vista de Tabla"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5"
+                    [attr.fill]="vista==='tabla' ? 'white' : '#374151'"
+                    viewBox="0 0 24 24">
+                    <path d="M3 5h18v2H3V5zm0 6h18v2H3v-2zm0 6h18v2H3v-2z"/>
+                </svg>
+            </button>
+        </div>
     </div>
 
-    <!-- Categorías -->
-    <select class="border border-gray-300 p-2 rounded-md bg-white w-full max-w-xs">
-      <option>Todas las categorías</option>
-      <option>Electrónica</option>
-      <option>Mobiliario</option>
-      <option>Herramientas</option>
-    </select>
+    <!-- MODALES -->
+    <app-createart *ngIf="showModal" (close)="closeModal()" (articuloCreado)="agregarArticuloALista($event)"></app-createart>
+    <app-editart *ngIf="showEditModal" [articulo]="articuloSeleccionado" (close)="cerrarEditModal()" (articuloEditado)="actualizarArticulo($event)"></app-editart>
 
-    <!-- Agregar Artículo -->
-    <button class="bg-black text-white px-4 py-2 rounded-md flex items-center gap-2 hover:bg-gray-800">
-      ➕ Agregar Artículo
-    </button>
-  </div>
+    <!-- GRID CARDS -->
+    <div *ngIf="vista==='cards'" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
 
-  <!-- LISTA DE ARTÍCULOS -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div
+            *ngFor="let item of articulosFiltradosPaginados"
+            class="bg-white rounded-2xl p-4 sm:p-5 shadow-lg hover:shadow-2xl transition-all duration-300
+                   flex flex-col justify-between border border-gray-100 hover:-translate-y-1"
+        >
 
-    <!-- CARD DE ARTÍCULO -->
-    <div
-      *ngFor="let item of articulos"
-      class="bg-white border border-gray-300 rounded-lg p-4 shadow-sm"
-    >
+            <div class="relative w-full h-36 sm:h-40 mb-5 bg-gradient-to-br from-gray-100 to-gray-200
+                        rounded-xl flex items-center justify-center overflow-hidden shadow-inner">
 
-      <!-- Imagen -->
-      <img src="assets/proyector.png" class="w-full h-32 object-contain mb-4">
+                <img
+                    [src]="item.imagen || 'assets/proyector.png'"
+                    class="max-w-[80%] max-h-[80%] object-contain drop-shadow-md transition-transform duration-300 hover:scale-105"
+                />
 
-      <!-- Texto -->
-      <p class="font-semibold">Proyector Epson EB-X41</p>
-      <p class="text-gray-600 text-sm">Electrónica</p>
-      <p class="text-gray-600 text-sm mb-3">Proyector de alta definición para presentaciones</p>
+                <span
+                    class="absolute top-2 left-2 bg-white bg-opacity-80 backdrop-blur-sm
+                           text-gray-800 text-xs font-semibold px-2 py-1 rounded-lg shadow-sm">
+                    {{
+                        item.categoriaId == 1 ? 'Electrónica' :
+                        item.categoriaId == 2 ? 'Laboratorio' :
+                        item.categoriaId == 3 ? 'Uso escolar' : 'Sin categoría'
+                    }}
+                </span>
+            </div>
 
-      <!-- Estado -->
-      <select
-        class="border border-gray-300 rounded-md w-full p-2 text-sm mb-4"
-      >
-        <option>Disponible</option>
-        <option>Prestado</option>
-        <option>Mantenimiento</option>
-      </select>
+            <div class="text-left mb-6">
+                <h2 class="text-base sm:text-lg font-semibold text-gray-800 leading-tight">{{ item.nombre }}</h2>
+                <p class="text-gray-600 text-sm mt-2 line-clamp-3">{{ item.descripcion }}</p>
 
-      <!-- Acciones -->
-      <div class="flex justify-end gap-3 text-gray-700 text-xl">
-        <button class="hover:text-black">✏️</button>
-        <button class="hover:text-black">🗑️</button>
-        <button class="hover:text-black">ℹ️</button>
-      </div>
+                <div class="mt-3">
+                    <span *ngIf="item.stock === 0 && item.estado === 'Prestado'"
+                        class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-700 border border-red-300">
+                        ⚠️ Todos los artículos prestados
+                    </span>
+                    <span *ngIf="item.stock > 0 || item.estado !== 'Prestado'"
+                        class="inline-block px-3 py-1 text-xs font-semibold rounded-full"
+                        [ngClass]="{'bg-red-100 text-red-700': item.stock < 5 && item.stock > 0, 'bg-green-100 text-green-700': item.stock >= 5}">
+                        Stock: {{ item.stock }}
+                    </span>
+                </div>
+
+                <div
+                    class="mt-3 inline-block px-3 py-1 text-xs font-semibold rounded-full"
+                    [ngClass]="{
+                        'bg-green-100 text-green-700': item.estado === 'Disponible',
+                        'bg-yellow-100 text-yellow-700': item.estado === 'Prestado',
+                        'bg-red-100 text-red-700': item.estado === 'Mantenimiento'
+                    }"
+                >
+                    {{ item.estado }}
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center mt-auto pt-3 border-t border-gray-200">
+
+                <button class="border border-gray-200 p-2 rounded-lg hover:bg-indigo-50 text-indigo-600"
+                    (click)="abrirEditModal(item)">✏️</button>
+
+                <button class="border border-gray-200 p-2 rounded-lg hover:bg-red-50 text-red-600"
+                    (click)="confirmarEliminar(item)">🗑️</button>
+
+            </div>
+
+        </div>
 
     </div>
 
-  </div>
+    <!-- PAGINACION CARDS -->
+    <div *ngIf="vista==='cards'" class="flex justify-center mt-6 gap-2 overflow-x-auto">
+        <button
+            (click)="cambiarPagina(page - 1)"
+            [disabled]="page === 1"
+            class="px-3 py-1 rounded-lg border border-gray-300 hover:bg-gray-100 disabled:opacity-50 text-sm"
+        >◀</button>
+
+        <button
+            *ngFor="let p of [].constructor(totalPaginas); let i = index"
+            (click)="cambiarPagina(i + 1)"
+            [ngClass]="page === i + 1 ? 'bg-indigo-600 text-white' : 'bg-white text-gray-700'"
+            class="px-3 py-1 rounded-lg border border-gray-300 hover:bg-indigo-50 text-sm"
+        >
+            {{ i + 1 }}
+        </button>
+
+        <button
+            (click)="cambiarPagina(page + 1)"
+            [disabled]="page === totalPaginas"
+            class="px-3 py-1 rounded-lg border border-gray-300 hover:bg-gray-100 disabled:opacity-50 text-sm"
+        >▶</button>
+    </div>
+
+    <!-- TABLA -->
+    <div *ngIf="vista==='tabla'" class="overflow-x-auto bg-white shadow-lg rounded-xl border border-gray-200 mt-4">
+
+        <table class="min-w-full divide-y divide-gray-200 text-sm">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="px-4 sm:px-6 py-3 font-semibold text-gray-600 uppercase text-xs">Imagen</th>
+                    <th class="px-4 sm:px-6 py-3 font-semibold text-gray-600 uppercase text-xs">Nombre</th>
+                    <th class="px-4 sm:px-6 py-3 font-semibold text-gray-600 uppercase text-xs">Categoría</th>
+                    <th class="px-4 sm:px-6 py-3 font-semibold text-gray-600 uppercase text-xs">Stock</th>
+                    <th class="px-4 sm:px-6 py-3 font-semibold text-gray-600 uppercase text-xs">Estado</th>
+                    <th class="px-4 sm:px-6 py-3 font-semibold text-gray-600 uppercase text-xs">Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody class="bg-white divide-y divide-gray-200">
+                <tr *ngFor="let item of articulosPaginadosTabla">
+
+                    <td class="px-4 sm:px-6 py-4">
+                        <img [src]="item.imagen || 'assets/proyector.png'" class="w-16 sm:w-20 h-12 sm:h-16 object-contain rounded-md">
+                    </td>
+
+                    <td class="px-4 sm:px-6 py-4 text-gray-800 font-medium text-xs sm:text-sm">{{ item.nombre }}</td>
+
+                    <td class="px-4 sm:px-6 py-4 text-indigo-600 text-xs sm:text-sm">
+                        {{
+                            item.categoriaId == 1 ? 'Electrónica' :
+                            item.categoriaId == 2 ? 'Laboratorio' :
+                            item.categoriaId == 3 ? 'Uso escolar' : 'Sin categoría'
+                        }}
+                    </td>
+
+                    <td class="px-4 sm:px-6 py-4 text-center">
+                        <span *ngIf="item.stock === 0 && item.estado === 'Prestado'"
+                            class="px-3 py-1 text-xs font-bold rounded-full bg-red-100 text-red-700 border border-red-300">
+                            Todos prestados
+                        </span>
+                        <span *ngIf="item.stock > 0 || item.estado !== 'Prestado'"
+                            class="px-3 py-1 text-xs font-bold rounded-full"
+                            [ngClass]="{'bg-red-100 text-red-700': item.stock < 5, 'bg-green-100 text-green-700': item.stock >= 5}">
+                            {{ item.stock }}
+                        </span>
+                    </td>
+
+                    <td class="px-4 sm:px-6 py-4">
+                        <select class="appearance-none border border-gray-300 px-3 py-1 text-xs sm:text-sm rounded-lg bg-white w-28 sm:w-auto">
+                            <option [selected]="item.estado == 'Disponible'">Disponible</option>
+                            <option [selected]="item.estado == 'Prestado'">Prestado</option>
+                            <option [selected]="item.estado == 'Mantenimiento'">Mantenimiento</option>
+                        </select>
+                    </td>
+
+                    <td class="px-4 sm:px-6 py-4 flex gap-2 sm:gap-3">
+
+                        <button
+                            class="border border-gray-200 p-2 rounded-lg hover:bg-indigo-50 text-indigo-600 text-xs sm:text-sm"
+                            (click)="abrirEditModal(item)"
+                        >✏️</button>
+
+                        <button
+                            class="border border-gray-200 p-2 rounded-lg hover:bg-red-50 text-red-600 text-xs sm:text-sm"
+                            (click)="confirmarEliminar(item)"
+                        >
+                            🗑️
+                        </button>
+
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- PAGINACIÓN TABLA -->
+    <div *ngIf="vista==='tabla'" class="flex justify-center mt-6 gap-2 overflow-x-auto">
+        <button
+            (click)="cambiarPaginaTabla(pageTabla - 1)"
+            [disabled]="pageTabla === 1"
+            class="px-3 py-1 rounded-lg border border-gray-300 hover:bg-gray-100 disabled:opacity-50 text-sm"
+        >◀</button>
+
+        <button
+            *ngFor="let p of [].constructor(totalPaginasTabla); let i = index"
+            (click)="cambiarPaginaTabla(i + 1)"
+            [ngClass]="pageTabla === i + 1 ? 'bg-indigo-600 text-white' : 'bg-white text-gray-700'"
+            class="px-3 py-1 rounded-lg border border-gray-300 hover:bg-indigo-50 text-sm"
+        >
+            {{ i + 1 }}
+        </button>
+
+        <button
+            (click)="cambiarPaginaTabla(pageTabla + 1)"
+            [disabled]="pageTabla === totalPaginasTabla"
+            class="px-3 py-1 rounded-lg border border-gray-300 hover:bg-gray-100 disabled:opacity-50 text-sm"
+        >▶</button>
+    </div>
 
 </div>

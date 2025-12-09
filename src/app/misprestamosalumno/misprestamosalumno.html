@@ -1,0 +1,83 @@
+<div class="min-h-screen bg-gray-100 px-6 py-6">
+  <app-headeralumno></app-headeralumno>
+
+  <!-- TÍTULO -->
+  <h1 class="text-center text-3xl font-semibold mb-2">
+    Mis Préstamos
+  </h1>
+
+  <p class="text-center text-gray-600 mb-8">
+    {{ solicitudes.length }} solicitudes en total
+  </p>
+
+  <!-- ESTADOS -->
+  <div class="flex justify-center gap-4 mb-10 text-sm">
+    <span class="bg-green-400 text-black px-4 py-1 rounded-full font-semibold">Aprobado</span>
+    <span class="bg-yellow-300 text-black px-4 py-1 rounded-full font-semibold">Pendiente</span>
+    <span class="bg-red-400 text-white px-4 py-1 rounded-full font-semibold">Rechazado</span>
+  </div>
+
+  <!-- LISTA DE PRÉSTAMOS -->
+  <div class="flex flex-col gap-6 mx-auto max-w-4xl">
+
+    <div
+      *ngFor="let prestamo of solicitudes"
+      class="bg-white border border-gray-300 rounded-md p-5 shadow-sm flex gap-5 relative"
+    >
+      <!-- IMAGEN -->
+      <div class="flex justify-center items-center">
+        <img
+          [src]="prestamo.imagen"
+          (error)="prestamo.imagen='assets/proyector.png'"
+          class="w-32 h-24 object-contain"
+        />
+      </div>
+
+      <div class="flex-1">
+        <h2 class="text-lg font-semibold">
+          {{ prestamo.nombre }}
+        </h2>
+
+        <!-- Categoría -->
+        <p *ngIf="prestamo.categoria" class="text-sm text-gray-700 -mt-1">
+          {{ prestamo.categoria }}
+        </p>
+
+        <!-- ESTADO -->
+        <span
+          class="text-xs font-semibold px-3 py-1 rounded-full inline-block mt-2"
+          [ngClass]="{
+            'bg-green-400 text-black': prestamo.estado === 'Aprobado',
+            'bg-yellow-300 text-black': prestamo.estado === 'Pendiente',
+            'bg-red-400 text-white': prestamo.estado === 'Rechazado'
+          }"
+        >
+          {{ prestamo.estado }}
+        </span>
+
+        <!-- Mensaje -->
+        <p *ngIf="prestamo.mensaje" class="mt-3 text-sm text-gray-700">
+          {{ prestamo.mensaje }}
+        </p>
+
+        <!-- Fechas -->
+        <p class="text-xs text-gray-500 mt-1">
+          Solicitado el {{ prestamo.fechaSolicitud }}
+          <span *ngIf="prestamo.fechaRespuesta">
+            · Respondido el {{ prestamo.fechaRespuesta }}
+          </span>
+        </p>
+      </div>
+
+      <!-- BOTÓN CANCELAR -->
+      <button
+        *ngIf="prestamo.estado === 'Pendiente'"
+        (click)="cancelarSolicitud(prestamo)"
+        class="absolute top-3 right-3 text-sm flex items-center gap-1 px-3 py-1 border border-gray-400 rounded-md hover:bg-gray-100"
+      >
+        ❌ Cancelar
+      </button>
+    </div>
+
+  </div>
+</div>

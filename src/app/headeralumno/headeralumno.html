@@ -1,0 +1,52 @@
+<div class="bg-white shadow-md rounded-md p-4 flex justify-between items-center mb-6">
+  <div class="flex items-center gap-3">
+    <img src="assets/logo.png" alt="Logo" class="w-20 md:w-24">
+    <div class="ml-12">
+      <p class="font-semibold text-gray-800 text-lg leading-tight">Bienvenido,</p>
+      <p class="font-semibold -mt-1">Alumno</p>
+    </div>
+  </div>
+
+  <button
+    class="flex items-center gap-2 text-gray-700 hover:text-black font-medium"
+    (click)="confirmarCerrarSesion()"
+  >
+    <img src="assets/Cerrar Sesión.png" class="w-6 h-6" />
+    Cerrar Sesión
+  </button>
+</div>
+
+<!-- TABS -->
+<div class="bg-orange-200 rounded-full flex justify-center items-center p-3 gap-16 mb-8 shadow-md">
+    <a
+      routerLink="/homealumno"
+      routerLinkActive="bg-white border border-black shadow text-black"
+      class="flex items-center gap-2 px-6 py-2 rounded-full font-medium hover:bg-white transition-all text-gray-700"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <img src="assets/inventario.png" class="w-6">
+      Articulos
+    </a>
+
+   <a
+      routerLink="/misprestamosalumno"
+      routerLinkActive="bg-white border border-black shadow text-black"
+      class="flex items-center gap-2 px-6 py-2 rounded-full font-medium hover:bg-white transition-all text-gray-700"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <img src="assets/solicitud.png" class="w-6">
+      Solicitudes
+    </a>
+
+   <a
+      routerLink="/notificacionesalumno"
+      routerLinkActive="bg-white border border-black shadow text-black"
+      class="flex items-center gap-2 px-6 py-2 rounded-full font-medium hover:bg-white transition-all text-gray-700"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <img src="assets/notificaciones.png" class="w-6">
+      Notificaciones
+    </a>
+
+ 
+</div>

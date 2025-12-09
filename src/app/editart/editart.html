@@ -1,0 +1,44 @@
+<div class="fixed inset-0 backdrop-blur-md bg-black/20 flex justify-center items-center z-50">
+    <div class="bg-white rounded-2xl p-6 w-[28rem] shadow-2xl">
+
+        <h2 class="text-xl font-bold mb-4">Editar Artículo</h2>
+
+        <label class="block mb-2">Nombre</label>
+        <input [(ngModel)]="articulo.nombre" class="w-full border p-2 rounded mb-4">
+
+        <label class="block mb-2">Descripción</label>
+        <textarea [(ngModel)]="articulo.descripcion" class="w-full border p-2 rounded mb-4"></textarea>
+
+        <label class="block mb-2">Categoría</label>
+        <select [(ngModel)]="articulo.categoriaId" class="w-full border p-2 rounded mb-4">
+            <option value="1">Electrónica</option>
+            <option value="2">Laboratorio</option>
+            <option value="3">Uso escolar</option>
+        </select>
+
+        <label class="block mb-2">Estado</label>
+        <select [(ngModel)]="articulo.estado" class="w-full border p-2 rounded mb-4">
+            <option>Disponible</option>
+            <option>Prestado</option>
+            <option>Mantenimiento</option>
+        </select>
+
+        <label class="block mb-2">Stock</label>
+        <input 
+            type="number" 
+            [(ngModel)]="articulo.stock" 
+            class="w-full border p-2 rounded mb-4"
+            min="0"
+        >
+        <label class="block mb-2">Imagen (URL)</label>
+        <input [(ngModel)]="articulo.imagen" class="w-full border p-2 rounded mb-4">
+
+        <div class="flex justify-end gap-3 mt-5">
+            <button (click)="cerrar()" class="px-4 py-2 border rounded-xl">Cancelar</button>
+            <button (click)="guardarCambios()" class="px-4 py-2 rounded-xl text-white" style="background:#FFD9AB">
+                **Editar**
+            </button>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,85 @@
+<app-adminheader></app-adminheader>
+
+<h2 class="text-3xl font-bold text-center text-[#03045E] mb-8">
+  Usuarios
+</h2>
+
+<div class="overflow-x-auto px-6">
+  <table class="min-w-full bg-white rounded-xl shadow-xl overflow-hidden border border-gray-200">
+
+    <!-- ENCABEZADO CON ESTILO PREMIUM -->
+    <thead class="text-black" style="background-color: #FFD9AB;">
+      <tr>
+        <th class="px-6 py-4 text-left text-sm font-semibold">Nombre</th>
+        <th class="px-6 py-4 text-left text-sm font-semibold">Correo</th>
+        <th class="px-6 py-4 text-center text-sm font-semibold">Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr 
+        *ngFor="let u of usuariosPaginados"
+        class="border-b hover:bg-[#FFF1DD] transition"
+      >
+        <!-- NOMBRE -->
+        <td class="px-6 py-4 font-semibold text-gray-800">
+          {{ u.nombre }}
+        </td>
+
+        <!-- CORREO -->
+        <td class="px-6 py-4 text-gray-700">
+          {{ u.correo }}
+        </td>
+
+        <!-- ACCIONES -->
+        <td class="px-6 py-4 text-center">
+          <button
+            (click)="confirmarCambioRol(u)"
+            [disabled]="u.rol === 'ADMIN'"
+            class="px-4 py-2 rounded-lg text-sm transition shadow-md"
+            [ngClass]="
+              u.rol === 'ADMIN'
+                ? 'bg-gray-400 text-white cursor-not-allowed'
+                : 'text-black hover:brightness-95'
+            "
+            style="background-color: #FFD9AB;"
+          >
+            {{ u.rol === 'ADMIN' ? 'Convertido en ADMIN' : 'Hacer ADMIN' }}
+          </button>
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+  <!-- PAGINACIÓN -->
+  <div class="flex justify-center items-center gap-4 mt-5">
+
+    <button 
+      (click)="paginaAnterior()"
+      [disabled]="paginaActual === 1"
+      class="px-4 py-2 rounded-lg border disabled:opacity-40 transition hover:brightness-95"
+      style="background-color: #FFD9AB;"
+    >
+      ◀ Anterior
+    </button>
+
+    <span class="font-semibold text-lg text-[#03045E]">
+      Página {{ paginaActual }} / {{ totalPaginas }}
+    </span>
+
+    <button 
+      (click)="paginaSiguiente()"
+      [disabled]="paginaActual === totalPaginas"
+      class="px-4 py-2 rounded-lg border disabled:opacity-40 transition hover:brightness-95"
+      style="background-color: #FFD9AB;"
+    >
+      Siguiente ▶
+    </button>
+
+  </div>
+
+</div>

@@ -1,0 +1,67 @@
+<!-- BARRA SUPERIOR -->
+<div class="w-full bg-white shadow-sm border-b border-orange-300">
+
+  <div class="max-w-6xl mx-auto flex justify-between items-center px-4 md:px-8 py-3 md:py-4">
+
+    <!-- LOGO + TEXTO -->
+    <div class="flex items-center gap-3 md:gap-4">
+      <img src="assets/logo4.png" class="h-16 md:h-30" />
+
+      <div class="leading-tight hidden sm:block">
+        <p class="text-lg md:text-xl font-semibold">Bienvenido,</p>
+        <p class="text-sm md:text-base text-gray-600">Administrador</p>
+      </div>
+    </div>
+
+    <!-- CERRAR SESIÓN -->
+    <button 
+      (click)="cerrarSesion()"
+      class="flex items-center gap-2 text-gray-800 hover:text-red-600 font-medium transition text-sm md:text-base"
+    >
+      <img src="assets/Cerrar Sesión.png" class="w-5 md:w-6" />
+      <span class="hidden sm:inline">Cerrar Sesión</span>
+    </button>
+
+  </div>
+</div>
+
+<!-- NAV MENÚ -->
+<div class="w-full flex justify-center mt-3 mb-4 md:mt-4 md:mb-6">
+
+  <div class="bg-orange-200 rounded-full px-4 md:px-10 py-2 md:py-3 flex gap-4 sm:gap-8 md:gap-12 shadow-sm overflow-x-auto whitespace-nowrap">
+
+    <!-- INVENTARIO -->
+    <a 
+      routerLink="/administradorhome"
+      routerLinkActive="bg-white border border-black shadow text-black"
+      class="flex items-center gap-2 px-4 md:px-6 py-2 rounded-full font-medium transition-all hover:bg-white text-sm md:text-base"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <img src="assets/inventario.png" class="w-5 md:w-6">
+      Inventario
+    </a>
+
+    <!-- SOLICITUDES -->
+    <a
+      routerLink="/solicitudes"
+      routerLinkActive="bg-white border border-black shadow text-black"
+      class="flex items-center gap-2 px-4 md:px-6 py-2 rounded-full font-medium hover:bg-white transition-all text-gray-700 text-sm md:text-base"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <img src="assets/solicitud.png" class="w-5 md:w-6">
+      Solicitudes
+    </a>
+
+    <!-- USUARIOS -->
+    <button 
+      (click)="irUsuarios()"
+      routerLinkActive="bg-white border border-black shadow text-black"
+      class="flex items-center gap-2 px-4 md:px-6 py-2 rounded-full font-medium hover:bg-white transition-all text-gray-700 text-sm md:text-base"
+    >
+      <img src="assets/usuarios.png" class="w-5 md:w-6">
+      Usuarios
+    </button>
+
+  </div>
+
+</div>

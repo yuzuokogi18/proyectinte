@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class RegistroalumnoService {
 
-  private apiUrl = 'http://localhost:8080/api/users/register';
+  private apiUrl = 'http://44.209.19.27:8080/api/users/register';
+
 
   constructor(private http: HttpClient) {}
 

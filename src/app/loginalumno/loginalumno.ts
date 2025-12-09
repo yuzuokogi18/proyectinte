@@ -1,20 +1,20 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 import { LoginalumnoService } from '../services/loginalumno';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-loginalumno',
   imports: [NgIf, RouterLink, FormsModule],
   templateUrl: './loginalumno.html',
-  styleUrl: './loginalumno.css',
+  styleUrls: ['./loginalumno.css'],
 })
 export class Loginalumno {
 
   showPassword = false;
-
   correo: string = '';
   password: string = '';
 
@@ -27,29 +27,49 @@ export class Loginalumno {
     this.showPassword = !this.showPassword;
   }
 
-  // 📌 Método login actualizado con validación de roles
   login() {
-    const data = {
-      correo: this.correo,
-      password: this.password
-    };
+    const data = { correo: this.correo, password: this.password };
 
     this.loginService.login(data).subscribe({
-      next: (resp) => {
+      next: (resp: any) => {
+
+        console.log('RESPUESTA LOGIN:', resp); // Para verificar la respuesta
+
+        // Ajuste según tu backend
+        const userId = resp.userId;
+        const nombre = resp.nombre;
+        const rol = resp.rol;
+
+        if (!userId) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'No se encontró el ID del usuario',
+            confirmButtonColor: '#ef4444'
+          });
+          return;
+        }
+
+        // Guardar info en localStorage
+        localStorage.setItem('userId', userId.toString());
+        localStorage.setItem('userName', nombre);
+        localStorage.setItem('userRole', rol);
+        localStorage.setItem('token', resp.token);
+
         Swal.fire({
           icon: 'success',
           title: 'Bienvenido!',
-          text: 'Login exitoso',
+          text: `Hola ${nombre}`,
           confirmButtonColor: '#f97316'
         });
 
-        // 🔥 Validamos el rol que devuelve el backend
-        if (resp.rol === 'Alumno') {
+        // Redirigir según rol
+        if (rol === 'Alumno') {
           this.router.navigate(['/homealumno']);
-        } else if (resp.rol === 'Administrador') {
+        } else if (rol === 'Administrador') {
           this.router.navigate(['/administradorhome']);
         } else {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/landing']);
         }
       },
       error: (err) => {

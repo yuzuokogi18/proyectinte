@@ -10,4 +10,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideRouter(routes)
   ]
+
+  
 };

@@ -1,1 +1,92 @@
-<p>createart works!</p>
+<!-- CONTENEDOR MODAL -->
+<div class="fixed inset-0 flex items-center justify-center bg-white/0 backdrop-blur-sm z-50 px-4 sm:px-0">
+
+  <!-- FORMULARIO -->
+  <div class="bg-white w-full max-w-lg rounded-lg shadow-2xl p-6 animate-fadeIn z-50
+              max-h-[90vh] overflow-y-auto">
+
+    <!-- Encabezado -->
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold">Agregar Nuevo Artículo</h2>
+      <button (click)="closeModal()" class="text-gray-500 hover:text-gray-700 text-xl">✖</button>
+    </div>
+
+    <p class="text-gray-600 mb-4">Completa los datos del nuevo artículo</p>
+
+    <!-- Formulario -->
+    <div class="space-y-4">
+
+      <!-- NOMBRE -->
+      <div>
+        <label class="block font-medium">Nombre del Artículo</label>
+        <input type="text"
+               class="w-full border rounded-md p-2"
+               [(ngModel)]="form.nombre"
+               placeholder="Ej: Laptop Lenovo">
+      </div>
+
+      <!-- CATEGORÍA -->
+      <div>
+        <label class="block font-medium">Categoría</label>
+        <select class="w-full border rounded-md p-2" [(ngModel)]="form.categoriaId">
+          <option value="1">Electrónico</option>
+          <option value="2">Laboratorio</option>
+          <option value="3">Uso escolar</option>
+        </select>
+      </div>
+
+      <!-- DESCRIPCIÓN -->
+      <div>
+        <label class="block font-medium">Descripción</label>
+        <textarea class="w-full border rounded-md p-2"
+                  [(ngModel)]="form.descripcion"
+                  placeholder="Describe el artículo..."></textarea>
+      </div>
+
+      <!-- IMAGEN -->
+      <div>
+        <label class="block font-medium">URL de Imagen</label>
+        <input type="text"
+               placeholder="https://ejemplo.com/imagen.jpg"
+               class="w-full border rounded-md p-2"
+               [(ngModel)]="form.imagen">
+        <p class="text-xs text-gray-500">Ingresa la URL de una imagen para el artículo</p>
+      </div>
+
+      <!-- ESTADO -->
+      <div>
+        <label class="block font-medium">Estado</label>
+        <select class="w-full border rounded-md p-2" [(ngModel)]="form.estado">
+          <option value="Disponible">Disponible</option>
+          <option value="Mantenimiento">Mantenimiento</option>
+          <option value="Prestado">Prestado</option>
+        </select>
+      </div>
+
+      <!-- STOCK -->
+      <div>
+        <label class="block font-medium">Stock</label>
+        <input type="number"
+               min="1"
+               class="w-full border rounded-md p-2"
+               placeholder="Cantidad de artículos"
+               [(ngModel)]="form.stock">
+      </div>
+
+    </div>
+
+    <!-- BOTONES -->
+    <div class="flex flex-col sm:flex-row justify-end gap-3 mt-6">
+      <button (click)="closeModal()"
+              class="px-4 py-2 rounded-md border hover:bg-gray-100 w-full sm:w-auto">
+        Cancelar
+      </button>
+
+      <button (click)="agregarArticulo()"
+              class="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 w-full sm:w-auto">
+        Agregar Artículo
+      </button>
+    </div>
+
+  </div>
+</div>

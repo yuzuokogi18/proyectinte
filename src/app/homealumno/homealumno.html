@@ -1,0 +1,121 @@
+<div class="min-h-screen bg-gray-100 px-6 py-6">
+
+  <app-headeralumno></app-headeralumno>
+
+  <div [hidden]="vistaActual !== 'articulos'">
+    <h1 class="text-center text-3xl font-semibold mb-2">Artículos Disponibles</h1>
+    <p class="text-center text-gray-600 mb-8">Explora y solicita artículos para préstamo</p>
+
+    <div class="flex flex-wrap md:flex-nowrap items-center gap-4 mb-10 justify-center">
+      <div class="flex items-center bg-white border border-gray-300 rounded-md px-3 w-full md:max-w-sm">
+        <span class="text-gray-600 mr-2">🔍</span>
+        <input
+          type="text"
+          placeholder="Buscar Artículos..."
+          class="w-full p-2 outline-none"
+          [(ngModel)]="busqueda"
+          (ngModelChange)="paginaActual = 1" />
+      </div>
+
+      <select
+        class="border border-gray-300 p-2 rounded-md bg-white w-full md:w-56"
+        [(ngModel)]="categoriaSeleccionada"
+        (ngModelChange)="paginaActual = 1" >
+        <option value="">Todas las categorías</option>
+        <option value="1">Electrónica</option>
+        <option value="2">Laboratorio</option>
+        <option value="3">Uso escolar</option>
+      </select>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 px-8">
+      <div
+        *ngFor="let item of articulosFiltrados"
+        class="bg-white border border-gray-400 rounded-md p-5 shadow-md flex flex-col justify-between relative"
+      >
+        <span
+          class="absolute top-3 right-3 text-xs font-semibold px-3 py-1 rounded-full"
+          [ngClass]="
+            item.estado === 'Disponible'
+              ? 'bg-green-400 text-black'
+              : item.estado === 'Prestado'
+              ? 'bg-gray-300 text-black'
+              : item.estado === 'Mantenimiento'
+              ? 'bg-yellow-300 text-black'
+              : 'bg-red-300 text-black'
+          "
+        >
+          {{ item.estado }}
+        </span>
+
+        <div class="flex justify-center mb-4">
+          <img
+            [src]="item.imagen ? item.imagen : 'assets/proyector.png'"
+            class="w-40 h-28 object-contain"
+            alt="articulo"
+          >
+        </div>
+
+        <div class="text-left mb-6 leading-snug">
+          <h2 class="text-lg font-medium">{{ item.nombre }}</h2>
+          <p class="text-base">
+            {{
+              item.categoriaId == 1 ? 'Electrónica' :
+              item.categoriaId == 2 ? 'Laboratorio' :
+              item.categoriaId == 3 ? 'Uso escolar' : 'Sin categoría'
+            }}
+          </p>
+          <p class="text-base text-gray-600">{{ item.descripcion }}</p>
+        </div>
+
+        <div class="flex gap-4">
+          <button
+            class="border border-gray-500 px-4 py-2 rounded-md w-full hover:bg-gray-100"
+            (click)="verDetalles(item)"
+          >
+            Ver detalles
+          </button>
+
+          <button
+            *ngIf="item.estado === 'Disponible'"
+            (click)="solicitar(item)"
+            class="bg-black text-white px-4 py-2 rounded-md w-full hover:bg-gray-800"
+          >
+            Solicitar
+          </button>
+        </div>
+        </div>
+    </div>
+    
+    <div *ngIf="totalPaginas > 1" class="flex justify-center items-center mt-10 space-x-4">
+      
+      <button 
+        (click)="cambiarPagina(-1)" 
+        [disabled]="paginaActual === 1"
+        [class.opacity-50]="paginaActual === 1"
+        class="p-2 border border-gray-300 rounded-md bg-white hover:bg-gray-200 transition duration-150"
+      >
+        <span class="text-xl">⬅️</span> 
+      </button>
+
+      <span class="text-lg font-medium">
+        Página **{{ paginaActual }}** de **{{ totalPaginas }}**
+      </span>
+
+      <button 
+        (click)="cambiarPagina(1)" 
+        [disabled]="paginaActual === totalPaginas"
+        [class.opacity-50]="paginaActual === totalPaginas"
+        class="p-2 border border-gray-300 rounded-md bg-white hover:bg-gray-200 transition duration-150"
+      >
+        <span class="text-xl">➡️</span>
+      </button>
+      
+    </div>
+    </div>
+
+  <div [hidden]="vistaActual !== 'prestamos'">
+    <app-misprestamosalumno></app-misprestamosalumno>
+  </div>
+
+</div>
