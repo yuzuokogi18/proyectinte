@@ -1,44 +1,52 @@
 <!-- landing.component.html -->
 
-<div class="w-full min-h-screen bg-gray-100 flex justify-center px-12 py-10">
+<div class="w-full min-h-screen bg-gray-100 flex justify-center px-6 sm:px-12 py-10">
 
   <!-- Sección principal -->
   <section 
     class="w-full max-w-7xl bg-orange-200 rounded-xl
-           min-h-[85vh] p-12
+           min-h-[85vh] p-6 sm:p-12
            relative grid grid-cols-1 md:grid-cols-2 items-center">
 
     <!-- Logo -->
-    <div class="absolute top-4 left-8">
+    <div class="absolute top-3 left-4 sm:top-4 sm:left-8">
       <img 
         src="assets/logo4.png" 
         alt="Logo"
-        class="w-40 h-40 object-contain"
+        class="w-24 h-24 sm:w-40 sm:h-40 object-contain"
       >
     </div>
 
     <!-- Texto -->
-    <div class="pt-20">
-      <h1 class="text-7xl font-bold mb-4">
+    <div class="pt-32 sm:pt-20 px-2">
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold mb-4 leading-tight">
         Equipo listo para tus ideas, siempre.
       </h1>
 
-      <p class="text-xl md:text-2xl text-gray-900 mb-8 max-w-xl">
+      <p class="text-lg sm:text-xl md:text-2xl text-gray-900 mb-8 max-w-xl">
         Encuentra, solicita y recibe artículos para tus prácticas y tareas.
       </p>
 
-     <a [routerLink]="['loginalumno']"
-class="border-4 border-white px-10 py-5 text-black text-lg font-semibold bg-transparent rounded-md hover:bg-white/30 transition inline-block text-center">
-Solicita tu Prestamo YA!
-</a>
+      <!-- BOTÓN ANIMADO PRO -->
+      <a [routerLink]="['loginalumno']"
+      class="border-4 border-white px-6 py-3 sm:px-10 sm:py-5 
+             text-black text-base sm:text-lg font-semibold 
+             bg-white/20 backdrop-blur-md
+             rounded-md transition-all duration-300 
+             shadow-md hover:shadow-xl 
+             hover:-translate-y-1 hover:scale-105 
+             active:scale-95 active:shadow-sm
+             inline-block text-center">
+        Solicita tu Préstamo YA!
+      </a>
     </div>
 
     <!-- Imagen pegada abajo -->
-    <div class="flex justify-center self-end -mb-12">
+    <div class="flex justify-center self-end -mb-4 sm:-mb-12 mt-10 sm:mt-0">
       <img
         src="assets/landing-students.png"
         alt="Students"
-        class="w-96 md:w-[32rem]"
+        class="w-64 sm:w-96 md:w-[32rem]"
       >
     </div>
 
@@ -51,45 +59,51 @@ Solicita tu Prestamo YA!
 <!-- SEGUNDA SECCIÓN -->
 <!-- ===================================================== -->
 
-<section class="w-full max-w-7xl mx-auto mt-20 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+<section class="w-full max-w-7xl mx-auto mt-20 px-4 sm:px-0 
+                grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
   <!-- Imagen izquierda -->
   <div class="flex justify-center">
     <img 
       src="assets/landing-students-2.jpg" 
       alt="Students working"
-      class="w-[32rem] max-w-full"
+      class="w-full max-w-xs sm:max-w-md md:w-[32rem] rounded-lg"
     >
   </div>
 
   <!-- Contenido derecha -->
-  <div>
-    <h2 class="text-4xl md:text-5xl font-extrabold mb-10">
+  <div class="px-2">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-10">
       Artículos siempre disponibles<br>para ti
     </h2>
 
-    <!-- Tarjeta 1 -->
-    <div class="flex items-center gap-4 border-2 border-orange-300 shadow-md p-5 rounded-lg mb-6 bg-white">
-      <img src="assets/buscar.png" class="w-8 h-8" />
-      <p class="text-lg font-medium">Filtros rápidos para encontrar lo que buscas</p>
-    </div>
+    <!-- Tarjetas con hover -->
+    <div class="space-y-6">
 
-    <!-- Tarjeta 2 -->
-    <div class="flex items-center gap-4 border-2 border-orange-300 shadow-md p-5 rounded-lg mb-6 bg-white">
-      <img src="assets/cursor.png" class="w-8 h-8" />
-      <p class="text-lg font-medium">Solicita préstamos en un solo clic</p>
-    </div>
+      <div class="flex items-center gap-4 border-2 border-orange-300 shadow-md p-4 rounded-lg bg-white 
+                  transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02]">
+        <img src="assets/buscar.png" class="w-8 h-8" />
+        <p class="text-base sm:text-lg font-medium">Filtros rápidos para encontrar lo que buscas</p>
+      </div>
 
-    <!-- Tarjeta 3 -->
-    <div class="flex items-center gap-4 border-2 border-orange-300 shadow-md p-5 rounded-lg mb-6 bg-white">
-      <img src="assets/notifi.png" class="w-8 h-8" />
-      <p class="text-lg font-medium">Notificaciones claras y al momento</p>
-    </div>
+      <div class="flex items-center gap-4 border-2 border-orange-300 shadow-md p-4 rounded-lg bg-white 
+                  transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02]">
+        <img src="assets/cursor.png" class="w-8 h-8" />
+        <p class="text-base sm:text-lg font-medium">Solicita préstamos en un solo clic</p>
+      </div>
 
-    <!-- Tarjeta 4 -->
-    <div class="flex items-center gap-4 border-2 border-orange-300 shadow-md p-5 rounded-lg bg-white">
-      <img src="assets/curriculum.png" class="w-8 h-8" />
-      <p class="text-lg font-medium">Tu historial siempre ordenado</p>
+      <div class="flex items-center gap-4 border-2 border-orange-300 shadow-md p-4 rounded-lg bg-white 
+                  transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02]">
+        <img src="assets/notifi.png" class="w-8 h-8" />
+        <p class="text-base sm:text-lg font-medium">Notificaciones claras y al momento</p>
+      </div>
+
+      <div class="flex items-center gap-4 border-2 border-orange-300 shadow-md p-4 rounded-lg bg-white 
+                  transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02]">
+        <img src="assets/curriculum.png" class="w-8 h-8" />
+        <p class="text-base sm:text-lg font-medium">Tu historial siempre ordenado</p>
+      </div>
+
     </div>
 
   </div>
@@ -97,32 +111,27 @@ Solicita tu Prestamo YA!
 
 
 <!-- ===================================================== -->
-<!-- TERCERA SECCIÓN (la nueva que pediste) -->
+<!-- TERCERA SECCIÓN -->
 <!-- ===================================================== -->
 
-<section class="w-full max-w-7xl mx-auto mt-24 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+<section class="w-full max-w-7xl mx-auto px-4 sm:px-0 mt-24 
+                grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
   <!-- Texto izquierda -->
   <div>
-    <h2 class="text-4xl md:text-5xl font-extrabold mb-6">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6">
       Tu campus, tus herramientas, tu control
     </h2>
 
-    <p class="text-lg text-gray-800 mb-4">
-      Una Sistema que centraliza todos los materiales al alcance del alumno
+    <p class="text-base sm:text-lg text-gray-800 mb-4">
+      Un sistema que centraliza todos los materiales al alcance del alumno.
     </p>
 
-    <p class="text-lg text-gray-800 mb-4 ml-5">
-      • Más de X artículos disponibles para préstamo en tu Universidad
-    </p>
-
-    <p class="text-lg text-gray-800 mb-4 ml-5">
-      • Una experiencia intuitiva pensada para estudiantes.
-    </p>
-
-    <p class="text-lg text-gray-800 ml-5">
-      • Acompañamiento completo: desde la solicitud hasta la devolución.
-    </p>
+    <ul class="text-base sm:text-lg text-gray-800 space-y-3 ml-4">
+      <li>• Más de X artículos disponibles para préstamo</li>
+      <li>• Una experiencia intuitiva pensada para estudiantes</li>
+      <li>• Acompañamiento desde la solicitud hasta la devolución</li>
+    </ul>
   </div>
 
   <!-- Imagen derecha -->
@@ -130,75 +139,60 @@ Solicita tu Prestamo YA!
     <img 
       src="assets/landing-campus-control.png" 
       alt="Campus control"
-      class="w-[32rem] max-w-full"
+      class="w-full max-w-xs sm:max-w-md md:w-[32rem] rounded-lg"
     >
   </div>
-  
 
 </section>
+
+
 <!-- ===================================================== -->
-<!-- CUARTA SECCIÓN - "Lleva el control de tus préstamos..." -->
+<!-- CUARTA SECCIÓN -->
 <!-- ===================================================== -->
 
-<section class="w-full bg-[#f8d3ad] py-16 mt-24">
+<section class="w-full bg-[#f8d3ad] py-16 mt-24 px-4 sm:px-0">
 
-  <div class="max-w-6xl mx-auto px-6">
+  <div class="max-w-6xl mx-auto">
 
-    <!-- TÍTULO -->
-    <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">
+    <!-- Título -->
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10">
       Lleva el control de tus préstamos sin complicaciones...
     </h2>
 
-    <!-- LÍNEA + CÍRCULOS -->
-    <div class="relative flex justify-between items-center mb-16">
+    <!-- Línea + círculos -->
+    <div class="relative flex justify-between items-center mb-16 px-4 sm:px-16">
 
-      <!-- Línea -->
-      <div class="absolute top-1/2 left-0 right-0 h-1 bg-gray-300"></div>
+      <div class="absolute top-1/2 left-4 right-4 h-1 bg-gray-300 hidden sm:block"></div>
 
-      <!-- Círculo 1 -->
-      <div class="relative z-10 w-16 h-16 flex justify-center items-center 
-                  bg-white shadow-md rounded-full text-2xl font-bold">
+      <div class="relative z-10 w-14 h-14 flex justify-center items-center bg-white shadow-md rounded-full text-xl font-bold">
         1
       </div>
 
-      <!-- Círculo 2 -->
-      <div class="relative z-10 w-16 h-16 flex justify-center items-center 
-                  bg-white shadow-md rounded-full text-2xl font-bold">
+      <div class="relative z-10 w-14 h-14 flex justify-center items-center bg-white shadow-md rounded-full text-xl font-bold">
         2
       </div>
 
-      <!-- Círculo 3 -->
-      <div class="relative z-10 w-16 h-16 flex justify-center items-center 
-                  bg-white shadow-md rounded-full text-2xl font-bold">
+      <div class="relative z-10 w-14 h-14 flex justify-center items-center bg-white shadow-md rounded-full text-xl font-bold">
         3
       </div>
     </div>
 
-    <!-- TARJETAS -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+    <!-- Tarjetas -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 text-center">
 
-      <!-- TARJETA 1 -->
-      <div>
-        <img src="assets/paso1.jpg" class="w-48 h-48 mx-auto mb-4" />
-        <p class="text-lg font-medium">
-          Consulta artículos disponibles
-        </p>
+      <div class="transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-xl">
+        <img src="assets/paso1.jpg" class="w-40 h-40 mx-auto mb-4 rounded-lg" />
+        <p class="text-lg font-medium">Consulta artículos disponibles</p>
       </div>
 
-      <!-- TARJETA 2 -->
-      <div>
-        <img src="assets/paso2.jpg" class="w-48 h-48 mx-auto mb-4" />
-        <p class="text-lg font-medium">
-          Solicita un préstamo fácilmente
-        </p>
+      <div class="transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-xl">
+        <img src="assets/paso2.jpg" class="w-40 h-40 mx-auto mb-4 rounded-lg" />
+        <p class="text-lg font-medium">Solicita un préstamo fácilmente</p>
       </div>
 
-      <!-- TARJETA 3 -->
-      <div>
-        <img src="assets/paso3.jpg" class="w-48 h-48 mx-auto mb-4" />
-        <p class="text-lg font-medium">
-          Revisa el estado de tus solicitudes
-        </p>
+      <div class="transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-xl">
+        <img src="assets/paso3.jpg" class="w-40 h-40 mx-auto mb-4 rounded-lg" />
+        <p class="text-lg font-medium">Revisa el estado de tus solicitudes</p>
       </div>
 
     </div>
