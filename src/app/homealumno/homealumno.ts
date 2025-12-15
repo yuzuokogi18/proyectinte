@@ -25,8 +25,8 @@ export class Homealumno implements OnInit {
 
   articulos: any[] = [];
 
-  // 📦 Configuración de Paginación
-  articulosPorPagina: number = 8; // **⭐ Muestra 8 artículos por página**
+
+  articulosPorPagina: number = 8; 
   paginaActual: number = 1;
 
   userId: number | null = null;
@@ -45,7 +45,6 @@ export class Homealumno implements OnInit {
     this.obtenerArticulos();
   }
 
-  // ... (validarSesion, cambiarVista y obtenerArticulos se mantienen iguales)
   validarSesion() {
     const id = localStorage.getItem('userId');
     const nombre = localStorage.getItem('userName');
@@ -80,7 +79,6 @@ export class Homealumno implements OnInit {
       next: (data) => {
         console.log('Artículos desde backend:', data);
         this.articulos = data;
-        // Reiniciar la página a 1 al cargar nuevos artículos
         this.paginaActual = 1; 
         this.cdr.detectChanges();
       },
@@ -95,7 +93,6 @@ export class Homealumno implements OnInit {
     });
   }
 
-  // 🔍 Getter para obtener la lista COMPLETA de artículos filtrados (sin paginación)
   get articulosBaseFiltrados() {
     return this.articulos.filter(item => {
       const texto = this.busqueda.toLowerCase();
@@ -112,20 +109,17 @@ export class Homealumno implements OnInit {
     });
   }
 
-  // 📄 Getter para obtener los artículos de la página actual (PAGINADOS)
+
   get articulosFiltrados() {
     const articulosBase = this.articulosBaseFiltrados;
     const inicio = (this.paginaActual - 1) * this.articulosPorPagina;
     const fin = inicio + this.articulosPorPagina;
     return articulosBase.slice(inicio, fin);
   }
-
-  // 🔢 Cálculo del total de páginas
   get totalPaginas(): number {
     return Math.ceil(this.articulosBaseFiltrados.length / this.articulosPorPagina);
   }
 
-  // 🔄 Método para cambiar de página
   cambiarPagina(delta: number) {
     const nuevaPagina = this.paginaActual + delta;
     if (nuevaPagina >= 1 && nuevaPagina <= this.totalPaginas) {
@@ -133,7 +127,6 @@ export class Homealumno implements OnInit {
     }
   }
 
-  // ... (confirmarCerrarSesion, solicitar y verDetalles se mantienen iguales)
   confirmarCerrarSesion() {
     Swal.fire({
       title: '¿Estás seguro?',

@@ -54,9 +54,6 @@ export class Administradorhome implements OnInit {
         this.cargarArticulos();
     }
 
-    // ------------------------------------------------------------
-    // 🔵 CARGAR ARTÍCULOS
-    // ------------------------------------------------------------
     cargarArticulos() {
         this.item.getItems().subscribe({
             next: (data: any) => {
@@ -70,9 +67,6 @@ export class Administradorhome implements OnInit {
         });
     }
 
-    // ------------------------------------------------------------
-    // 🟢 CREAR ARTÍCULO
-    // ------------------------------------------------------------
     agregarArticuloALista(nuevo: any) {
         this.articulos.push({
             id: nuevo.id,
@@ -95,9 +89,6 @@ export class Administradorhome implements OnInit {
         this.showModal = false;
     }
 
-    // ------------------------------------------------------------
-    // ✏️ EDITAR ARTÍCULO (ABRIR MODAL)
-    // ------------------------------------------------------------
     abrirEditModal(articulo: any) {
         this.articuloSeleccionado = { ...articulo };
         this.showEditModal = true;
@@ -108,9 +99,6 @@ export class Administradorhome implements OnInit {
         this.articuloSeleccionado = null;
     }
 
-    // ------------------------------------------------------------
-    // 🟠 ACTUALIZAR ARTÍCULO
-    // ------------------------------------------------------------
     actualizarArticulo(articuloActualizado: any) {
 
         if (!articuloActualizado.id) {
@@ -133,9 +121,6 @@ export class Administradorhome implements OnInit {
         });
     }
 
-    // ------------------------------------------------------------
-    // 🗑️ ELIMINAR ARTÍCULO CON ALERTA
-    // ------------------------------------------------------------
     confirmarEliminar(item: any) {
         Swal.fire({
             title: '¿Estás seguro?',
@@ -158,7 +143,6 @@ export class Administradorhome implements OnInit {
                             confirmButtonColor: '#000'
                         });
 
-                        // quitar de la lista sin recargar
                         this.articulos = this.articulos.filter(x => x.id !== item.id);
                         this.cd.detectChanges();
                     },
@@ -171,9 +155,6 @@ export class Administradorhome implements OnInit {
         });
     }
 
-    // ------------------------------------------------------------
-    // 🔍 BUSCADOR Y FILTROS
-    // ------------------------------------------------------------
     onBusquedaChange() { this.cd.detectChanges(); }
 
     onCategoriaChange() { this.cd.detectChanges(); }
@@ -191,10 +172,6 @@ export class Administradorhome implements OnInit {
             )
         );
     }
-
-    // ------------------------------------------------------------
-    // 📌 PAGINACIÓN CARDS
-    // ------------------------------------------------------------
     get articulosFiltradosPaginados() {
         const start = (this.page - 1) * this.pageSize;
         return this.articulosFiltrados.slice(start, start + this.pageSize);
@@ -209,9 +186,6 @@ export class Administradorhome implements OnInit {
         this.page = nueva;
     }
 
-    // ------------------------------------------------------------
-    // 📌 PAGINACIÓN TABLA
-    // ------------------------------------------------------------
     get articulosPaginadosTabla() {
         const start = (this.pageTabla - 1) * this.pageSizeTabla;
         return this.articulosFiltrados.slice(start, start + this.pageSizeTabla);
@@ -226,9 +200,7 @@ export class Administradorhome implements OnInit {
         this.pageTabla = nueva;
     }
 
-    // ------------------------------------------------------------
-    // 🚪 CERRAR SESIÓN
-    // ------------------------------------------------------------
+
     confirmarCerrarSesion() {
         Swal.fire({
             title: '¿Estás seguro?',

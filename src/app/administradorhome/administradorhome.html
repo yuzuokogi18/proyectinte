@@ -2,7 +2,6 @@
 
 <div class="min-h-screen bg-blow-50 px-4 sm:px-6 py-6 sm:py-8">
 
-    <!-- TITULO + BOTON -->
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
 
         <div>
@@ -18,11 +17,8 @@
             ➕ Agregar Artículo
         </button>
     </div>
-
-    <!-- BUSCADOR + SELECT + BOTONES -->
     <div class="flex flex-col sm:flex-row flex-wrap md:flex-nowrap items-center gap-4 mb-8 w-full">
 
-        <!-- BUSCADOR -->
         <div class="flex items-center bg-white border border-gray-200 rounded-2xl px-4 py-3 shadow-md w-full sm:w-[20rem] md:w-[22rem]">
             <span class="text-gray-400 mr-3">🔍</span>
             <input
@@ -33,8 +29,6 @@
                 (input)="onBusquedaChange()"
             />
         </div>
-
-        <!-- SELECT -->
         <select
             class="bg-white border border-gray-200 rounded-2xl px-4 py-3 shadow-md
                    w-full sm:w-[20rem] md:w-[22rem] text-gray-700 text-sm sm:text-[15px] outline-none h-[3.2rem]"
@@ -46,11 +40,7 @@
             <option value="2">Laboratorio</option>
             <option value="3">Uso escolar</option>
         </select>
-
-        <!-- BOTONES DE VISTA -->
         <div class="flex gap-3 ml-auto w-full sm:w-auto justify-end">
-
-            <!-- Cards -->
             <button
                 (click)="vista='cards'"
                 [ngClass]="vista==='cards' ? 'text-white shadow' : 'bg-white text-gray-700'"
@@ -64,8 +54,6 @@
                     <path d="M3 3h8v8H3V3zm0 10h8v8H3v-8zm10-10h8v8h-8V3zm0 10h8v8h-8v-8z"/>
                 </svg>
             </button>
-
-            <!-- Tabla -->
             <button
                 (click)="vista='tabla'"
                 [ngClass]="vista==='tabla' ? 'text-white shadow' : 'bg-white text-gray-700'"
@@ -81,12 +69,9 @@
             </button>
         </div>
     </div>
-
-    <!-- MODALES -->
     <app-createart *ngIf="showModal" (close)="closeModal()" (articuloCreado)="agregarArticuloALista($event)"></app-createart>
     <app-editart *ngIf="showEditModal" [articulo]="articuloSeleccionado" (close)="cerrarEditModal()" (articuloEditado)="actualizarArticulo($event)"></app-editart>
 
-    <!-- GRID CARDS -->
     <div *ngIf="vista==='cards'"
          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
 
@@ -154,7 +139,6 @@
 
     </div>
 
-    <!-- PAGINACION CARDS -->
     <div *ngIf="vista==='cards'" class="flex justify-center mt-6 gap-2 overflow-x-auto">
         <button
             (click)="cambiarPagina(page - 1)"
@@ -178,7 +162,7 @@
         >▶</button>
     </div>
 
-    <!-- TABLA -->
+
     <div *ngIf="vista==='tabla'"
          class="overflow-x-auto bg-white shadow-lg rounded-xl border border-gray-200 mt-4">
 
@@ -252,8 +236,6 @@
             </tbody>
         </table>
     </div>
-
-    <!-- PAGINACIÓN TABLA -->
     <div *ngIf="vista==='tabla'" class="flex justify-center mt-6 gap-2 overflow-x-auto">
         <button
             (click)="cambiarPaginaTabla(pageTabla - 1)"

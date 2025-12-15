@@ -21,12 +21,10 @@ export class Notificacionesalumno {
 
   constructor(private http: HttpClient) {}
 
-  // Obtener todas las notificaciones del usuario
   getByUser(userId: number): Observable<Notificacion[]> {
     return this.http.get<Notificacion[]>(`${this.baseUrl}/user/${userId}`);
   }
 
-  // Marcar notificación como leída
   marcarComoLeida(id: number): Observable<any> {
     return this.http.patch(`${this.baseUrl}/${id}/read`, {});
   }

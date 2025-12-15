@@ -14,7 +14,7 @@ import { Headeralumno } from '../headeralumno/headeralumno';
 export class Notificaciones implements OnInit {
 
   notificaciones: Notificacion[] = [];
-  userId = 1; // Cambiar por el ID del usuario actual según tu auth
+  userId = 1; 
 
   constructor(private notiService: Notificacionesalumno) {}
 
@@ -22,7 +22,6 @@ export class Notificaciones implements OnInit {
     this.cargarNotificaciones();
   }
 
-  // Cargar notificaciones desde el backend
   cargarNotificaciones() {
     this.notiService.getByUser(this.userId).subscribe({
       next: (data) => {
@@ -34,12 +33,10 @@ export class Notificaciones implements OnInit {
     });
   }
 
-  // Getter para contar notificaciones sin leer
   get notificacionesSinLeer(): number {
     return this.notificaciones.filter(n => !n.leida).length;
   }
 
-  // Marcar una notificación como leída
   marcarComoLeida(n: Notificacion) {
     this.notiService.marcarComoLeida(n.id).subscribe({
       next: () => n.leida = true,
@@ -47,7 +44,7 @@ export class Notificaciones implements OnInit {
     });
   }
 
-  // Marcar todas las notificaciones como leídas
+
   marcarTodasComoLeidas() {
     const observables = this.notificaciones
       .filter(n => !n.leida)

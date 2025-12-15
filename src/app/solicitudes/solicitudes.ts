@@ -29,10 +29,9 @@ export class Solicitudes implements OnInit {
   historial: any[] = [];
   cargando: boolean = true;
 
-  // Variables de Paginación
   indiceInicioPendientes: number = 0;
   indiceInicioHistorial: number = 0;
-  readonly ITEMS_POR_PAGINA: number = 5; // Constante para la paginación
+  readonly ITEMS_POR_PAGINA: number = 5; 
 
   constructor(
     private requestService: Request,
@@ -41,10 +40,10 @@ export class Solicitudes implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cargarSolicitudes(); // ✅ Cargar automáticamente al iniciar
+    this.cargarSolicitudes(); 
   }
 
-  // Propiedades calculadas para el total de páginas
+  
   get totalPaginasPendientes(): number {
     return Math.ceil(this.pendientes.length / this.ITEMS_POR_PAGINA);
   }
@@ -53,7 +52,7 @@ export class Solicitudes implements OnInit {
     return Math.ceil(this.historial.length / this.ITEMS_POR_PAGINA);
   }
 
-  // Métodos de Paginación para Pendientes
+
   siguientePendientes() {
     if (this.indiceInicioPendientes + this.ITEMS_POR_PAGINA < this.pendientes.length) {
       this.indiceInicioPendientes += this.ITEMS_POR_PAGINA;
@@ -66,7 +65,6 @@ export class Solicitudes implements OnInit {
     }
   }
 
-  // Métodos de Paginación para Historial
   siguienteHistorial() {
     if (this.indiceInicioHistorial + this.ITEMS_POR_PAGINA < this.historial.length) {
       this.indiceInicioHistorial += this.ITEMS_POR_PAGINA;
@@ -81,21 +79,20 @@ export class Solicitudes implements OnInit {
 
   cargarSolicitudes() {
     this.cargando = true;
-    // Reiniciar paginación al cargar nuevas solicitudes
+ 
     this.indiceInicioPendientes = 0;
     this.indiceInicioHistorial = 0;
 
 
     this.requestService.getRequests().subscribe({
       next: (data: any[]) => {
-        // Normalizar datos
+
         this.solicitudes = data.map(s => ({
           ...s,
           userName: s.userName || `Usuario ID: ${s.userId}`,
           itemName: s.itemName || `Ítem ID: ${s.itemId}`
         }));
 
-        // Separar pendientes e historial
         this.pendientes = this.solicitudes.filter(
           s => s.estado?.trim().toLowerCase() === 'pendiente'
         );
@@ -105,7 +102,7 @@ export class Solicitudes implements OnInit {
         );
 
         this.cargando = false;
-        this.cd.detectChanges(); // ✅ Forzar actualización de la vista
+        this.cd.detectChanges(); 
       },
       error: err => {
         Swal.fire('Error', 'No se pudieron cargar las solicitudes.', 'error');
@@ -115,10 +112,6 @@ export class Solicitudes implements OnInit {
     });
   }
 
-  // ============================================================
-  // 🟢 APROBAR CON ALERTA DE CONFIRMACIÓN
-  // *Lógica de aprobar sin cambios relevantes a la paginación, se mantiene igual*
-  // ============================================================
   aprobar(s: any) {
     Swal.fire({
       title: '¿Aprobar este préstamo?',
@@ -142,7 +135,6 @@ export class Solicitudes implements OnInit {
       this.requestService.actualizarRequest(s.id, solicitudActualizada)
         .subscribe({
           next: () => {
-            // Crear préstamo
             const nuevoPrestamo = {
               requestId: s.id,
               fechaEntrega: new Date().toISOString().split('T')[0],
@@ -159,7 +151,7 @@ export class Solicitudes implements OnInit {
                     `La solicitud #${s.id} fue aprobada y se creó el préstamo.`,
                     'success'
                   );
-                  this.cargarSolicitudes(); // ✅ Actualizar lista automáticamente
+                  this.cargarSolicitudes(); 
                 },
                 error: () => {
                   Swal.fire(
@@ -178,10 +170,6 @@ export class Solicitudes implements OnInit {
     });
   }
 
-  // ============================================================
-  // 🔴 RECHAZAR CON ALERTA DE CONFIRMACIÓN
-  // *Lógica de rechazar sin cambios relevantes a la paginación, se mantiene igual*
-  // ============================================================
   rechazar(s: any) {
     Swal.fire({
       title: '¿Rechazar esta solicitud?',
@@ -210,7 +198,7 @@ export class Solicitudes implements OnInit {
               `La solicitud #${s.id} fue rechazada.`,
               'info'
             );
-            this.cargarSolicitudes(); // ✅ Actualizar lista automáticamente
+            this.cargarSolicitudes(); 
           },
           error: () => {
             Swal.fire('Error', 'No se pudo rechazar la solicitud.', 'error');

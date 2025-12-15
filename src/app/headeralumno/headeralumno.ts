@@ -15,7 +15,7 @@ export class Headeralumno {
   @Output() onCambiarVista = new EventEmitter<string>();
   @Output() onCerrarSesion = new EventEmitter<void>();
 
-  constructor(private router: Router) {} // ← NECESARIO para navegar
+  constructor(private router: Router) {} 
 
   cambiarVista(vista: string) {
     this.onCambiarVista.emit(vista);
@@ -33,8 +33,8 @@ export class Headeralumno {
       cancelButtonText: 'No'
     }).then(result => {
       if (result.isConfirmed) {
-        this.onCerrarSesion.emit();   // ← emite al padre (opcional)
-        this.router.navigate(['/']);  // ← vuelve al login
+        this.onCerrarSesion.emit();   
+        this.router.navigate(['/']);  
       }
     });
   }

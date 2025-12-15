@@ -33,9 +33,8 @@ export class Loginalumno {
     this.loginService.login(data).subscribe({
       next: (resp: any) => {
 
-        console.log('RESPUESTA LOGIN:', resp); // Para verificar la respuesta
+        console.log('RESPUESTA LOGIN:', resp); 
 
-        // Ajuste según tu backend
         const userId = resp.userId;
         const nombre = resp.nombre;
         const rol = resp.rol;
@@ -49,8 +48,6 @@ export class Loginalumno {
           });
           return;
         }
-
-        // Guardar info en localStorage
         localStorage.setItem('userId', userId.toString());
         localStorage.setItem('userName', nombre);
         localStorage.setItem('userRole', rol);
@@ -62,8 +59,6 @@ export class Loginalumno {
           text: `Hola ${nombre}`,
           confirmButtonColor: '#f97316'
         });
-
-        // Redirigir según rol
         if (rol === 'Alumno') {
           this.router.navigate(['/homealumno']);
         } else if (rol === 'Administrador') {

@@ -46,7 +46,7 @@ export class Registroalumno {
           text: 'El alumno fue registrado correctamente.',
           confirmButtonColor: '#f97316'
         }).then(() => {
-          this.router.navigate(['/loginalumno']); // 🔥 Redirección aquí
+          this.router.navigate(['/loginalumno']); 
         });
 
         this.nombre = '';

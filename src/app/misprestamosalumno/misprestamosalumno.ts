@@ -39,7 +39,7 @@ export class Misprestamosalumno implements OnInit {
         this.solicitudes = data.map((r: any) => ({
           id: r.id,
           nombre: r.itemName || "Equipo sin nombre",
-          categoria: r.categoria || "", // Se muestra solo si existe
+          categoria: r.categoria || "", 
           imagen: "assets/proyector.png",
           estado: r.estado,
           mensaje:
@@ -47,7 +47,7 @@ export class Misprestamosalumno implements OnInit {
               ? "Tu solicitud fue aprobada ✅"
               : r.estado === "Pendiente"
               ? "Tu solicitud está en revisión."
-              : "", // Rechazado no muestra mensaje
+              : "", 
           fechaSolicitud: r.fechaSolicitud
             ? new Date(r.fechaSolicitud).toLocaleString()
             : "No registrada",

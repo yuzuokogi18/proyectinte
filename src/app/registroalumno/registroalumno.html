@@ -1,16 +1,12 @@
 <div class="min-h-screen flex items-center justify-center bg-white px-4">
   <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-
-    <!-- Imagen -->
     <div class="flex justify-center">
       <img src="assets/registro-students.png" alt="Students" class="w-[90%] h-auto">
     </div>
 
-    <!-- Formulario -->
     <div class="px-6 md:px-12">
       <h2 class="text-4xl font-semibold mb-10">Registrate Alumno</h2>
 
-      <!-- Nombre -->
       <label class="block text-lg mb-1 font-medium">Nombre (s):</label>
       <input
         type="text"
@@ -18,8 +14,6 @@
         class="w-full border border-orange-200 rounded-md p-3 mb-6
                outline-none focus:ring-2 focus:ring-orange-300"
       />
-
-      <!-- Apellido -->
       <label class="block text-lg mb-1 font-medium">Apellido (s):</label>
       <input
         type="text"
@@ -28,7 +22,6 @@
                outline-none focus:ring-2 focus:ring-orange-300"
       />
 
-      <!-- Correo -->
       <label class="block text-lg mb-1 font-medium">Correo Electronico :</label>
       <input
         type="email"
@@ -38,7 +31,6 @@
                outline-none focus:ring-2 focus:ring-orange-300"
       />
 
-      <!-- Contraseña -->
       <label class="block text-lg mb-1 font-medium">Contraseña:</label>
       <div class="relative">
         <input
@@ -58,7 +50,6 @@
         </button>
       </div>
 
-      <!-- Botón -->
       <button
         (click)="registrar()"
         class="bg-orange-300 hover:bg-orange-400 w-full text-white text-xl 

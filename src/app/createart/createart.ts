@@ -15,7 +15,7 @@ export class Createart {
 
   form = {
     nombre: '',
-    categoriaId: 1,   // Ahora inicia en Electrónico
+    categoriaId: 1,   
     descripcion: '',
     imagen: '',
     estado: 'Disponible',

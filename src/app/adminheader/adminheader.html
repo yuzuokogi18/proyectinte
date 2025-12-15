@@ -1,20 +1,14 @@
-<!-- BARRA SUPERIOR -->
+
 <div class="w-full bg-white shadow-sm border-b border-orange-300">
   <div class="max-w-6xl mx-auto flex justify-between items-center px-4 md:px-8 py-3 md:py-4">
-
-    <!-- LOGO + TEXTO -->
     <div class="flex items-center gap-3 md:gap-4">
       <img src="assets/logo4.png" class="h-12 sm:h-14 md:h-20" />
-
-      <!-- Texto oculto en móvil -->
       <div class="leading-tight hidden sm:block">
         <p class="text-base md:text-xl font-semibold">Bienvenido,</p>
         <p class="text-xs md:text-base text-gray-600">Administrador</p>
       </div>
     </div>
-
-    <!-- CERRAR SESIÓN -->
-    <button 
+        <button 
       (click)="cerrarSesion()"
       class="flex items-center gap-2 text-gray-800 hover:text-red-600 font-medium transition text-xs sm:text-sm md:text-base"
     >
@@ -25,14 +19,12 @@
   </div>
 </div>
 
-<!-- NAV MENÚ -->
 <div class="w-full flex justify-center mt-3 mb-4 md:mt-4 md:mb-6">
 
   <div
     class="bg-orange-200 rounded-full px-3 sm:px-6 md:px-10 py-2 md:py-3 flex gap-3 sm:gap-6 md:gap-12 
            shadow-sm overflow-x-auto scrollbar-none whitespace-nowrap items-center">
 
-    <!-- INVENTARIO -->
     <a 
       routerLink="/administradorhome"
       routerLinkActive="bg-white border border-black shadow text-black"
@@ -44,7 +36,6 @@
       <span class="hidden xs:inline">Inventario</span>
     </a>
 
-    <!-- SOLICITUDES -->
     <a
       routerLink="/solicitudes"
       routerLinkActive="bg-white border border-black shadow text-black"
@@ -56,7 +47,6 @@
       <span class="hidden xs:inline">Solicitudes</span>
     </a>
 
-    <!-- USUARIOS -->
     <button 
       (click)="irUsuarios()"
       routerLinkActive="bg-white border border-black shadow text-black"
